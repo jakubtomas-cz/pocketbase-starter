@@ -12,6 +12,6 @@ COPY --from=builder /app/app ./app
 COPY --from=builder /app/views ./views
 COPY --from=builder /app/pb_public ./pb_public
 
-EXPOSE 1080
+EXPOSE 8090
 VOLUME ["/app/pb_data"]
 CMD ["./app", "serve", "--http=0.0.0.0:8090"]
