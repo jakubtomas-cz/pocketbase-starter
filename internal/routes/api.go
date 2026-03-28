@@ -14,9 +14,8 @@ func Register(pb core.App) {
 
 func RegisterAPIs(pb core.App) {
 	pb.OnServe().BindFunc(func(se *core.ServeEvent) error {
-		se.Router.GET("/api/hello/{name}", func(e *core.RequestEvent) error {
-			name := e.Request.PathValue("name")
-			return e.JSON(http.StatusOK, map[string]string{"message": "Hello, " + name})
+		se.Router.GET("/health", func(e *core.RequestEvent) error {
+			return e.String(http.StatusOK, "OK")
 		})
 
 		return se.Next()
