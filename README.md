@@ -68,7 +68,7 @@ Watches all `.go` files and restarts on change, ignoring `pb_data/`, `pb_public/
 ## Building
 
 ```bash
-make build      # Compiles to ./app
+make build      # Compiles to ./bin/app
 ```
 
 ## Docker
