@@ -144,9 +144,45 @@ func Register(pb core.App) {
 
 See the [PocketBase hooks reference](https://pocketbase.io/docs/go-event-hooks/) for all available events.
 
+## Extending the Starter
+
+As your project grows, here are conventional places to add new code:
+
+| Folder / Package | Purpose |
+|---|---|
+| `internal/pages/` | UI-related route handlers (server-rendered pages, form submissions) — keeps view logic separate from API routes |
+| `internal/middlewares/` | Custom middleware (auth guards, rate limiting, request logging) — register these in `bootstrap.go` |
+| `internal/models/` | Domain structs and helpers that wrap PocketBase records with typed fields and business logic |
+| `internal/jobs/` | Cron jobs and scheduled background tasks — wire them up in `bootstrap.go` using PocketBase's scheduler |
+
+None of these packages exist in the starter by default — create them when you need them and register their entry functions in `internal/app/bootstrap.go`.
+
 ## Static Files (SPA)
 
 Drop files into `pb_public/` to serve them statically. Index fallback is enabled by default, so SPAs with client-side routing work without extra configuration.
+
+### Full-Stack in One Repo
+
+You can scaffold a frontend app (React, Vue, Svelte, etc.) directly inside this repository and configure its build output to `pb_public/`. This keeps your entire stack — backend, frontend, and database migrations — in one place.
+
+For example, with Vite:
+
+```bash
+npm create vite@latest ui -- --template react
+```
+
+Then set the build output in `ui/vite.config.ts`:
+
+```ts
+export default {
+  build: {
+    outDir: '../pb_public',
+    emptyOutDir: true,
+  },
+}
+```
+
+Run `npm run build` inside `ui/` and PocketBase will serve the compiled app from `pb_public/` automatically. During development, run the Vite dev server alongside `make dev` and proxy API requests to `http://localhost:8090`.
 
 ## CLI Flags
 

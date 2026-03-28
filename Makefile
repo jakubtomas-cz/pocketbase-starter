@@ -1,6 +1,6 @@
 RUN_COMMAND := go run cmd/server/main.go serve --http=localhost:8090
 
-.PHONY: run build dev
+.PHONY: run build dev docker
 
 run:
 	${RUN_COMMAND}
