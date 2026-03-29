@@ -55,6 +55,8 @@ make run
 
 The server starts at `http://localhost:8090`. The admin UI is available at `http://localhost:8090/_/`.
 
+A healthcheck endpoint is available at `GET /health` — returns `200 OK`.
+
 ## Development
 
 Hot-reload via [nodemon](https://nodemon.io/) (requires Node.js):
